@@ -1,0 +1,19 @@
+{% for item in items %}
+
+    <tr>
+      <td>{{loop.index}}</td>
+      <td class="author">2 days ago</td>
+      <td>
+      	<a data-toggle="modal" href="/remote/{{ item.hnsearch_id|e }}" data-target="#modal">
+      		<span class="label pull-right">{{ item.num_comments|e }} comments</span>
+      	</a>
+      </td>
+      <td>
+      	<a href="{{ item.link|e }}" target="_blank" title="Offline Hacker News - {{ item.link|e('url') }}" data-target="#modal">
+      		<strong>{{ item.title|e }}</strong> ({{ item.username|e }})
+      	</a>
+      </td>
+      <td><strong>{{ item.points|e }} points</strong></td>
+    </tr>
+
+{% endfor %}
