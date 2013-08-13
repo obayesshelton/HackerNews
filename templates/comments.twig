@@ -19,8 +19,49 @@
 	<style>
 
 		ul {
-			width: 100%;
+			margin-left: 0;
+			list-style: none;
 		}
+
+		p, ul {
+			line-height: 22px;
+			margin-top: 5px;
+			margin-bottom: 15px;
+		}
+
+		ul, ol {
+			padding: 0;
+			margin: 0 0 10px 25px;
+		}
+
+		.comments li {
+			padding: 10px 0;
+			border: 0;
+			background: none;
+			margin: 0;
+		}
+
+		.comments li {
+			padding: 15px;
+			display: block;
+			border: 2px solid #eee;
+			margin-top: 10px;
+			background: rgba(220,220,220, 0.1);
+			border-radius: 3px;
+		}
+
+		.comment-meta, .comment-links {
+			color: #999;
+			margin: 0;
+			font-size: 12px;
+		}
+
+		p, ul {
+			line-height: 22px;
+			margin-top: 5px;
+			margin-bottom: 15px;
+		}
+
 
 	</style>
 
@@ -31,12 +72,10 @@
     <ul>
 		{% for comment in comments.items %}
 
-		  <li>
-		  	<strong>{{ comment.username|e }}</strong>
-		  	<br/>
-		  	{{ comment.time|e }}
-		  	<br/>
-		  	{{ comment.comment|e }}
+		  <li class="comments">
+		  	<p class="comment-meta"><strong>{{ comment.username|e }}</strong>{{ comment.time|e }}</p>
+		  
+		  	<p>{{ comment.comment|raw) }}</p>
 		  </li>
 
 		  {% if comment.children %}
@@ -44,12 +83,10 @@
 		  	{% for childrencomment in comment.children %}
 
 			  	<ul>
-			  		<li>
-					  	<strong>{{ childrencomment.username|e }}</strong>
-					  	<br/>
-					  	{{ childrencomment.time|e }}
-					  	<br/>
-					  	{{ childrencomment.comment|e }}
+			  		<li class="comments">
+					  	<p class="comment-meta"><strong>{{ childrencomment.username|e }}</strong>{{ childrencomment.time|e }}</p>
+					  	
+					  	<p>ggg{{ childrencomment.comment|raw }}</p>
 			  		</li>
 			  	</ul>
 
