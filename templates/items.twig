@@ -3,17 +3,17 @@
     <li>
       <div>{{loop.index}}</div>
       <div class="author">2 days ago</div>
-      <div>
+      <div class="meta">
       	<a data-toggle="modal" href="/remote/{{ item.hnsearch_id|e }}" data-target="#modal">
       		<span class="label pull-right">{{ item.num_comments|e }} comments</span>
       	</a>
       </div>
-      <div>
+      <div class="title">
       	<a href="{{ item.link|e }}" target="_blank" title="Offline Hacker News - {{ item.link|e('url') }}" data-target="#modal">
       		<strong>{{ item.title|e }}</strong> ({{ item.username|e }})
       	</a>
       </div>
-      <div><strong>{{ item.points|e }} points</strong></div>
+      <div class="points"><strong>{{ item.points|e }} points</strong></div>
     </li>
 
 {% endfor %}
