@@ -26,13 +26,47 @@
 	
 	<style>
 
-		td.author {
-			font-size: 12px
-		}
-
 		.icon-refresh {
 			margin-top: 10px;
 		}
+
+#items li {
+    padding: 15px;
+    list-style: none;
+    border-bottom: 1px solid #eaeaea;
+    overflow: auto;
+}
+
+#items li div {
+    float: left ;
+    min-width: 20px;
+    color: #555;
+}
+
+#items {
+    margin-top: 50px ;
+}
+
+#items li .author, #items li .meta, #items li .points {
+    margin: 0px 10px;
+    float: right;
+}
+
+#items li .title {
+    float: left;
+}
+
+#items li .post_number {
+    color: #999;
+    font-size: 1.5em;
+    text-align: center;
+    width: 50px;
+    font-weight: bold;
+}
+
+.pull-right { background: #cdcdcd; text-shadow: none; }
+
+
 
   #t1 {position: fixed; z-index: 5;}
   #overlay { width: 100%; height: 100%; position: fixed; top: 0; z-index: 4; background: rgba(255,255,255,0.8)}
