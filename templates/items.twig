@@ -1,7 +1,7 @@
 {% for item in items %}
 
     <li>
-      <div>{{loop.index}}</div>
+      <div class="post_number">{{loop.index}}</div>
       <div class="author">2 days ago</div>
       <div class="meta">
       	<a data-toggle="modal" href="/remote/{{ item.hnsearch_id|e }}" data-target="#modal">
