@@ -6,13 +6,15 @@ var hackerNews = function() {
 
 	this.loadItems = function() {
 
-		$('.spinner').show();
+		$('#t1').show();
+		$('#overlay').show();
 
 		$.ajax({
 	    	url:"/items",  
 	    	success:function(data) {
 	      		$('#items').html(data);
-	      		$('.spinner').hide();
+	      		$('#t1').hide();
+	      		$('#overlay').hide();
 	    	}
 	  	});
 
