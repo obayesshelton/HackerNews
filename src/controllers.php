@@ -26,14 +26,16 @@ $app->get('/remote/{idDirty}', function ($idDirty) use ($app) {
 
 	$idClean = explode('-' , $idDirty);
 
-	$commentsUrl = 'http://hndroidapi.appspot.com/nestedcomments/format/json/id/' . $idClean[0];
+	$commentsUrl = 'http://node-hnapi.herokuapp.com/item/' . $idClean[0];
 
-	$commentsJson = file_get_contents($commentsUrl);
-	$comments = json_decode($commentsJson, TRUE);
+	$comments = json_decode(file_get_contents($commentsUrl), TRUE);
 
-	return $app['twig']->render('comments.twig', array(
-    	'comments' => $comments
-    ));
+    $nestComments = new HackerNews\Classes\NestComments();
+
+    $rtn['html'] =  $nestComments->makeList($comments['comments']);
+    $rtn['success'] = true;
+
+    return $app->json($rtn, 201);
 
 });
 

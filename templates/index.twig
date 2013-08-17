@@ -151,11 +151,29 @@
   </script>
 
   <script>
+
+
+
+getComments = function(url) {
+
+$('#modal .modal-body').html('');
+$('#modal .modal-body').html('<img src="bootstrap/img/ajax-loader.gif"/>');
+$('#modal').modal();
+
+$.getJSON(url).success(function(data) {
+
+   $('#modal .modal-body').html('');
+   $('#modal .modal-body').html(data.html);
+   $('#modal').modal();
+});
+
+};
+
 throb_big = new Throbber({
         size:50,
       strokewidth: 4,
       lines: 13,
-      rotationspeed: 6, color: 'blue'
+      rotationspeed: 6, color: '#0088cc'
     });
   throb_big.appendTo( document.getElementById('t1'));
   throb_big.start();

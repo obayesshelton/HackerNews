@@ -4,9 +4,9 @@
       <div class="post_number">{{loop.index}}</div>
       <div class="author">2 days ago</div>
       <div class="meta">
-      	<a data-toggle="modal" href="/remote/{{ item.hnsearch_id|e }}" data-target="#modal">
+      	<div onclick="getComments('/remote/{{ item.hnsearch_id|e }}')">
       		<span class="label pull-right">{{ item.num_comments|e }} comments</span>
-      	</a>
+      	</div>
       </div>
       <div class="title">
       	<a href="{{ item.link|e }}" target="_blank" title="Offline Hacker News - {{ item.link|e('url') }}" data-target="#modal">
