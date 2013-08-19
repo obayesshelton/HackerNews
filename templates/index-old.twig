@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Template &middot; Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap/js/html5shiv.js"></script>
+    <![endif]-->
+
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="bootstrap/ico/favicon.png">
+	
+	<style>
+
+		.icon-refresh {
+			margin-top: 10px;
+		}
+
+#items li {
+    padding: 15px;
+    list-style: none;
+    border-bottom: 1px solid #eaeaea;
+    overflow: auto;
+}
+
+#items li div {
+    float: left ;
+    min-width: 20px;
+    color: #555;
+}
+
+#items {
+    margin-top: 50px ;
+}
+
+#items li .author, #items li .meta, #items li .points {
+    margin: 0px 10px;
+    float: right;
+}
+
+#items li .title {
+    float: left;
+}
+
+#items li .post_number {
+    color: #999;
+    font-size: 1.5em;
+    text-align: center;
+    width: 50px;
+    font-weight: bold;
+}
+
+.pull-right { background: #cdcdcd; text-shadow: none; }
+
+
+
+  #t1 {position: fixed; z-index: 5;}
+  #overlay { width: 100%; height: 100%; position: fixed; top: 0; z-index: 4; background: rgba(255,255,255,0.8)}
+  p { line-height: 1.5em}
+
+	</style>
+
+  </head>
+
+  <body>
+
+  	<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Hacker News</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">New</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <!--<li><a href="#api">API</a></li>-->
+              <li><i class="icon-refresh icon-white" onclick="var hackerNewsClass = new hackerNews; return hackerNewsClass.loadItems();"></i></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <br class="clear"/>
+    <br class="clear"/>
+
+    <div class="container">
+
+      <div id="overlay"></div>
+      <div id="t1"></div>
+
+		  <ul id="items">
+
+		  </ul>
+		</table>
+
+	</div>
+
+  <!-- Modal -->
+	<div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>Comments</h3>
+		</div>
+		<div class="modal-body">
+			
+			<img src="bootstrap/img/ajax-loader.gif"/>
+          
+		</div>
+	</div>
+
+	  <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap-transition.js"></script>
+    <script src="bootstrap/js/bootstrap-alert.js"></script>
+    <script src="bootstrap/js/bootstrap-modal.js"></script>
+    <script src="bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="bootstrap/js/bootstrap-tab.js"></script>
+    <script src="bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="bootstrap/js/bootstrap-popover.js"></script>
+    <script src="bootstrap/js/bootstrap-button.js"></script>
+    <script src="bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="js/core.js"></script>
+
+    <script>
+  (function(e){var t=e.document,n=Math,r=e.setTimeout,i="getContext"in t.createElement("canvas"),s=function(e,t){e=e||{};for(var n in t){e[n]=t[n]}return e},o=function(n){if(!i){return{rgb:false,alpha:1}}var r=t.createElement("i"),s;r.style.display="none";r.style.color=n;t.body.appendChild(r);s=e.getComputedStyle(r,null).getPropertyValue("color").replace(/^rgba?\(([^\)]+)\)/,"$1").replace(/\s/g,"").split(",").splice(0,4);t.body.removeChild(r);r=null;return{alpha:s.length==4?s.pop():1,rgb:s}},u=function(e,t,n){var r=n?-2:2;e.translate(t/r,t/r)},a,f,l,c,h,p=function(e,t,r,i){a=1-e||0;c=1;h=-1;var s=t.size;if(t.clockwise===false){c=-1;h=1}r.clearRect(0,0,s,s);r.globalAlpha=t.alpha;r.lineWidth=t.strokewidth;for(f=0;f<t.lines;f++){l=f+i>=t.lines?f-t.lines+i:f+i;r.strokeStyle="rgba("+t.color.join(",")+","+n.max(0,l/t.lines-a)+")";r.beginPath();r.moveTo(s/2,s/2-t.padding/2);r.lineTo(s/2,0);r.stroke(t.strokewidth);u(r,s,false);r.rotate(c*(360/t.lines)*n.PI/180);u(r,s,true)}if(t.rotationspeed){r.save();u(r,s,false);r.rotate(h*(360/t.lines/(20-t.rotationspeed*2))*n.PI/180);u(r,s,true)}};Throbber=function(r){var s=this.elem=t.createElement("canvas"),o=this;if(!isNaN(r)){r={size:r}}this.o={size:34,rotationspeed:6,clockwise:true,color:"#fff",fade:300,fallback:false,alpha:1};this.configure(r);this.phase=-1;if(i){this.ctx=s.getContext("2d");s.width=s.height=this.o.size}else if(this.o.fallback){s=this.elem=new Image;s.src=this.o.fallback}this.loop=function(){var t=o.o,r=0,u=1e3/t.fade/t.fps,a=1e3/t.fps,f=o.step,l=s.style,c=s.currentStyle,h=c&&c.filter||l.filter,d="filter"in l&&t.fallback&&!i;return function(){if(o.phase==3){r-=u;if(r<=0){o.phase=0}}if(o.phase==1){r+=u;if(r>=1){o.phase=2}}if(d){l.filter="alpha(opacity="+n.min(t.alpha*100,n.max(0,Math.round(r*100)))+")"}else if(!i&&t.fallback){l.opacity=r}else if(i){p(r,t,o.ctx,f);f=f===0?o.o.lines:f-1}e.setTimeout(o.loop,1e3/t.fps)}}()};Throbber.prototype={constructor:Throbber,appendTo:function(e){this.elem.style.display="none";e.appendChild(this.elem);return this},configure:function(e){var t=this.o,r;s(t,e||{});r=o(t.color);s(t,s({padding:t.size/2,strokewidth:n.max(1,n.min(t.size/30,3)),lines:n.min(30,t.size/2+4),alpha:r.alpha||1,fps:n.min(30,t.size+4)},e));t.color=r.rgb;this.step=t.lines;return this},start:function(){this.elem.style.display="block";if(this.phase==-1){this.loop()}this.phase=1;return this},stop:function(){this.phase=3;return this},toggle:function(){if(this.phase==2){this.stop()}else{this.start()}}}})(this)
+  </script>
+
+  <script>
+
+
+
+getComments = function(url) {
+
+$('#modal .modal-body').html('');
+$('#modal .modal-body').html('<img src="bootstrap/img/ajax-loader.gif"/>');
+$('#modal').modal();
+
+$.getJSON(url).success(function(data) {
+
+   $('#modal .modal-body').html('');
+   $('#modal .modal-body').html(data.html);
+   $('#modal').modal();
+});
+
+};
+
+throb_big = new Throbber({
+        size:50,
+      strokewidth: 4,
+      lines: 13,
+      rotationspeed: 6, color: '#0088cc'
+    });
+  throb_big.appendTo( document.getElementById('t1'));
+  throb_big.start();
+
+function throbberPos() {
+  windowHeight = ($(window).outerHeight() / 2)
+  windowWidth = ($(window).outerWidth() / 2)
+  throbberHeight = ($('#t1').outerHeight() / 2)
+  throbberWidth = ($('#t1').outerWidth() / 2)
+  tops = windowHeight - throbberHeight
+  left = windowWidth - throbberWidth
+  $('#t1').css({top: tops, left: left})
+}
+  
+  throbberPos()
+  
+</script>
+
+  </body>
+</html>

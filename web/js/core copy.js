@@ -1,21 +1,5 @@
-var hackerNews = function() {
 
-	this.checkNetworkStatus = function() {
 
-	}
-
-	this.loadItems = function(feed, id) {
-
-		$.ajax({
-	    	url: feed,  
-	    	success:function(data) {
-	      		$('#' + id).html(data);
-	    	}
-	  	});
-
-	}
-
-}
 
 function center(cElement) {
 	var windowH = $(window).outerHeight()
@@ -34,11 +18,6 @@ function feedStart() {
 	var feedH = windowH - 70
 
 	$('.wrapper').css({top: feedH});
-
-	var hackerNewsClass = new hackerNews;
-	hackerNewsClass.loadItems('/items-engadget', 'engadget');
-	hackerNewsClass.loadItems('/items-wired', 'wired');
-	hackerNewsClass.loadItems('/items', 'hacker');
 }
 
 $(document).ready( function() {

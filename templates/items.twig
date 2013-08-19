@@ -1,3 +1,5 @@
+<ul id="items">
+
 {% for item in items %}
 
     <li>
@@ -16,4 +18,8 @@
       <div class="points"><strong>{{ item.points is defined ? item.points|e : '' }} points</strong></div>
     </li>
 
+
+
 {% endfor %}
+
+</ul>

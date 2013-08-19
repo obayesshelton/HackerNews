@@ -53,7 +53,44 @@ while($i <= 10) {
 
 }
 
-    return $app['twig']->render('items-engadget.twig', array(
+    return $app['twig']->render('items-v2.twig', array(
+        'items' => $items
+    ));
+
+});
+
+$app->get('/items-wired', function () use ($app) {
+
+    
+/**
+*
+* From http://www.w3schools.com/php/php_ajax_rss_reader.asp
+* edited by repat <repat[at]repat[dot]de>, Nov2012
+*
+*/
+
+// Set Feed URL, e.g. heise.de 
+$xml = ("http://feeds.wired.com/wired/index");
+
+// --- Don't change anything after this to line 23 --- //
+$xmlDoc = new DOMDocument();
+$xmlDoc->load($xml);
+
+//get and output "<item>" elements
+$x = $xmlDoc->getElementsByTagName('item');
+
+$i = 0;
+
+while($i <= 10) {
+  
+  $items[$i]['title'] = $x->item($i)->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
+  $items[$i]['link'] = $x->item($i)->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
+
+  $i++;
+
+}
+
+    return $app['twig']->render('items-v2.twig', array(
         'items' => $items
     ));
 
