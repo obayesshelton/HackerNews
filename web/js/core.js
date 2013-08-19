@@ -10,7 +10,7 @@ var hackerNews = function() {
 		$('#overlay').show();
 
 		$.ajax({
-	    	url:"/items",  
+	    	url:"/items-engadget",  
 	    	success:function(data) {
 	      		$('#items').html(data);
 	      		$('#t1').hide();

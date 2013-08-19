@@ -1,0 +1,17 @@
+{% for item in items %}
+
+    <li>
+      <div class="post_number">{{loop.index}}</div>
+      <div class="author">2 days ago</div>
+      <div class="meta">
+      	&nbsp;
+      </div>
+      <div class="title">
+      	<a href="{{ item.link|e }}" target="_blank" title="Offline Hacker News - {{ item.link is defined ? item.link|e('url') : '' }}" data-target="#modal">
+      		<strong>{{ item.title is defined ? item.title|e : '' }}</strong> (engadget)
+      	</a>
+      </div>
+      <div class="points"><strong>CATS ? ? ? </strong></div>
+    </li>
+
+{% endfor %}
