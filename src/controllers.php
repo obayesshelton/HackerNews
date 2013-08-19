@@ -15,8 +15,6 @@ $app->get('/', function () use ($app) {
 $app->get('/items', function () use ($app) {
 
 	$hackerNewsItems  = new HackerNews\Classes\GetFeed('https://', 'www.hnsearch.com', '/rss');
-var_dump($hackerNewsItems);exit;
-
 
     return $app['twig']->render('items.twig', array(
     	'items' => $hackerNewsItems->getItems()

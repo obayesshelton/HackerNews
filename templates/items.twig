@@ -4,16 +4,16 @@
       <div class="post_number">{{loop.index}}</div>
       <div class="author">2 days ago</div>
       <div class="meta">
-      	<div onclick="getComments('/remote/{{ item.hnsearch_id|e }}')">
-      		<span class="label pull-right">{{ item.num_comments|e }} comments</span>
+      	<div onclick="getComments('/remote/{{ item.hnsearch_id is defined ? item.hnsearch_id|e : '' }}')">
+      		<span class="label pull-right">{{ item.num_comments is defined ? item.num_comments|e : '0' }} comments</span>
       	</div>
       </div>
       <div class="title">
-      	<a href="{{ item.link|e }}" target="_blank" title="Offline Hacker News - {{ item.link|e('url') }}" data-target="#modal">
-      		<strong>{{ item.title|e }}</strong> ({{ item.username|e }})
+      	<a href="{{ item.link|e }}" target="_blank" title="Offline Hacker News - {{ item.link is defined ? item.link|e('url') : '' }}" data-target="#modal">
+      		<strong>{{ item.title is defined ? item.title|e : '' }}</strong> ({{ item.username is defined ? item.username|e : '' }})
       	</a>
       </div>
-      <div class="points"><strong>{{ item.points|e }} points</strong></div>
+      <div class="points"><strong>{{ item.points is defined ? item.points|e : '' }} points</strong></div>
     </li>
 
 {% endfor %}
