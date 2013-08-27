@@ -12,105 +12,68 @@ $app->get('/', function () use ($app) {
 
 })->bind('homepage');
 
-$app->get('/items', function () use ($app) {
-
-	$hackerNewsItems  = new HackerNews\Classes\GetFeed('https://', 'www.hnsearch.com', '/rss');
-
-    return $app['twig']->render('items.twig', array(
-    	'items' => $hackerNewsItems->getItems()
-    ));
-
-});
-
-$app->get('/items-engadget', function () use ($app) {
-
-    
-/**
-*
-* From http://www.w3schools.com/php/php_ajax_rss_reader.asp
-* edited by repat <repat[at]repat[dot]de>, Nov2012
-*
-*/
-
-// Set Feed URL, e.g. heise.de 
-$xml = ("http://www.engadget.com/rss.xml");
-
-// --- Don't change anything after this to line 23 --- //
-$xmlDoc = new DOMDocument();
-$xmlDoc->load($xml);
-
-//get and output "<item>" elements
-$x = $xmlDoc->getElementsByTagName('item');
-
-$i = 0;
-
-while($i <= 10) {
-  
-  $items[$i]['title'] = $x->item($i)->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
-  $items[$i]['link'] = $x->item($i)->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
-
-  $i++;
+$app->get('/items/provider/', function(Request $request) use ($app) {
 
 }
 
-    return $app['twig']->render('items-v2.twig', array(
-        'items' => $items
-    ));
+$app->get('/items/all/', function(Request $request) use ($app) {
 
-});
+	$hackerNewsItems = new HackerNews\Classes\Feed('http://', 'hackernews.local', '/rss.xml');
 
-$app->get('/items-wired', function () use ($app) {
+    $itemArray = $hackerNewsItems->getItem();
 
+    $item = new HackerNews\Classes\Item();
     
-/**
-*
-* From http://www.w3schools.com/php/php_ajax_rss_reader.asp
-* edited by repat <repat[at]repat[dot]de>, Nov2012
-*
-*/
+    $itemsCleanArray = array();
 
-// Set Feed URL, e.g. heise.de 
-$xml = ("http://feeds.wired.com/wired/index");
+    foreach($itemArray as $itemRaw) {
+        $itemsCleanArray[] = $item->createInstanceFromRow($itemRaw);
+    }
 
-// --- Don't change anything after this to line 23 --- //
-$xmlDoc = new DOMDocument();
-$xmlDoc->load($xml);
-
-//get and output "<item>" elements
-$x = $xmlDoc->getElementsByTagName('item');
-
-$i = 0;
-
-while($i <= 10) {
-  
-  $items[$i]['title'] = $x->item($i)->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
-  $items[$i]['link'] = $x->item($i)->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
-
-  $i++;
-
-}
-
-    return $app['twig']->render('items-v2.twig', array(
-        'items' => $items
-    ));
-
-});
-
-$app->get('/remote/{idDirty}', function ($idDirty) use ($app) {
-
-	$idClean = explode('-' , $idDirty);
-
-	$commentsUrl = 'http://node-hnapi.herokuapp.com/item/' . $idClean[0];
-
-	$comments = json_decode(file_get_contents($commentsUrl), TRUE);
-
-    $nestComments = new HackerNews\Classes\NestComments();
-
-    $rtn['html'] =  $nestComments->makeList($comments['comments']);
     $rtn['success'] = true;
+    $rtn['items_count'] = count($itemsCleanArray);
+    $rtn['items'] = $itemsCleanArray;
 
-    return $app->json($rtn, 201);
+    return new Response(
+        json_encode($rtn),
+        200,
+        ['Content-Type' => 'application/json']
+    );
+});
 
+$app->get('/contentproviders/id', function(Request $request) use ($app) {
+
+});
+
+$app->get('/contentproviders/all', function(Request $request) use ($app) {
+
+    $rtn['success'] = true;
+    $rtn['items'] = array(
+        1 => array(
+            'id' => '1',
+            'name' => 'wired',
+            'bio' => 'foo bar',
+            'title' => 'wired',
+            'uri' => 'www.wired.com',
+            'rssUri' => 'www.wired.com/rss.xml',
+            'logoUri' => 'foo.jpg',
+        ),
+        2 => array(
+            'id' => '2',
+            'name' => 'enadget',
+            'bio' => 'bar foo',
+            'title' => 'engadget',
+            'uri' => 'www.engadget.com',
+            'rssUri' => 'www.engadget.com/rss.xml',
+            'logoUri' => 'foo.jpg',
+        )
+    );
+
+    return new Response(
+        json_encode($rtn),
+        200,
+        ['Content-Type' => 'application/json']
+    );
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {

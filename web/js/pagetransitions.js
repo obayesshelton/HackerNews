@@ -1,9 +1,9 @@
 var PageTransitions = (function() {
 
-	var $main = $( '#pt-main' ),
+	var $main = $( '#mp-pusher' ),
 		$pages = $main.children( 'div.pt-page' ),
-		$iterate = $( '#iterateEffects' ),
-		animcursor = 17,
+		$iterate = $( '#right_action' ),
+		animcursor = 16,
 		pagesCount = $pages.length,
 		current = 0,
 		isAnimating = false,
@@ -20,6 +20,21 @@ var PageTransitions = (function() {
 		// support css animations
 		support = Modernizr.cssanimations;
 	
+	function actionChecker() {
+		if (current == (pagesCount - 1)) {
+			$('#right_action').css({backgroundPosition: '0px 50px'})
+		} else {
+			$('#right_action').css({backgroundPosition: '0px 0px'})
+		}
+	}
+
+	function animateAction() {
+		$('#right_action').animate({right: '-50px'}, 300, function() {
+			$(this).animate({right: '15'}, 300);
+			actionChecker();
+		})
+	}
+
 	function init() {
 
 		$pages.each( function() {
@@ -45,9 +60,11 @@ var PageTransitions = (function() {
 			// 	animcursor = 1;
 			// 13
 			// }
-			nextPage(animcursor);
-			
+			nextPage(animcursor = 3);
+			animateAction();
 		} );
+
+
 
 	}
 
@@ -56,10 +73,14 @@ var PageTransitions = (function() {
         // handle cursor keys
         if (event.keyCode == 37) {
             // slide left
-            nextPage(animcursor);
+            nextPage(animcursor = 6);
+            animateAction()
+           
         } else if (event.keyCode == 39) {
             // slide right
-           nextPage(animcursor);
+           nextPage(animcursor = 5);
+           animateAction()
+           
         }
 
         
