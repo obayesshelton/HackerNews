@@ -18,7 +18,7 @@ $app->get('/items/provider/', function(Request $request) use ($app) {
 
 $app->get('/items/all/', function(Request $request) use ($app) {
 
-	$hackerNewsItems = new HackerNews\Classes\Feed('http://', 'hackernews.local', '/rss.xml');
+	$hackerNewsItems = new HackerNews\Classes\Feed('http://', 'www.engadget.com', '/rss.xml');
 
     $itemArray = $hackerNewsItems->getItem();
 
