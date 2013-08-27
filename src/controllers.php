@@ -41,9 +41,6 @@ $app->get('/items/all/', function(Request $request) use ($app) {
     );
 });
 
-$app->get('/contentproviders/id', function(Request $request) use ($app) {
-
-});
 
 $app->get('/contentproviders/all', function(Request $request) use ($app) {
 
