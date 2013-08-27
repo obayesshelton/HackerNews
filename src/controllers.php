@@ -14,7 +14,7 @@ $app->get('/', function () use ($app) {
 
 $app->get('/items/provider/', function(Request $request) use ($app) {
 
-}
+});
 
 $app->get('/items/all/', function(Request $request) use ($app) {
 
@@ -41,6 +41,9 @@ $app->get('/items/all/', function(Request $request) use ($app) {
     );
 });
 
+$app->get('/contentproviders/id', function(Request $request) use ($app) {
+
+});
 
 $app->get('/contentproviders/all', function(Request $request) use ($app) {
 
