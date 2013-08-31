@@ -12,27 +12,15 @@ $app->get('/', function () use ($app) {
 
 })->bind('homepage');
 
-$app->get('/items/provider/', function(Request $request) use ($app) {
 
-});
+$app->get('/categories/all', function(Request $request) use ($app) {
 
-$app->get('/items/all/', function(Request $request) use ($app) {
+    $sql = "SELECT * FROM hacker_news_provider_categories";
+    $categories = $app['db']->fetchAll($sql, array());
 
-	$hackerNewsItems = new HackerNews\Classes\Feed('http://', 'www.engadget.com', '/rss.xml');
-
-    $itemArray = $hackerNewsItems->getItem();
-
-    $item = new HackerNews\Classes\Item();
-    
-    $itemsCleanArray = array();
-
-    foreach($itemArray as $itemRaw) {
-        $itemsCleanArray[] = $item->createInstanceFromRow($itemRaw);
-    }
-
-    $rtn['success'] = true;
-    $rtn['items_count'] = count($itemsCleanArray);
-    $rtn['items'] = $itemsCleanArray;
+    $rtn = new \stdClass();
+    $rtn->success = true;
+    $rtn->categories = $categories;
 
     return new Response(
         json_encode($rtn),
@@ -41,33 +29,14 @@ $app->get('/items/all/', function(Request $request) use ($app) {
     );
 });
 
-$app->get('/contentproviders/id', function(Request $request) use ($app) {
+$app->get('/providers/all', function(Request $request) use ($app) {
 
-});
+    $sql = "SELECT * FROM hacker_news_providers";
+    $providers = $app['db']->fetchAll($sql, array());
 
-$app->get('/contentproviders/all', function(Request $request) use ($app) {
-
-    $rtn['success'] = true;
-    $rtn['items'] = array(
-        1 => array(
-            'id' => '1',
-            'name' => 'wired',
-            'bio' => 'foo bar',
-            'title' => 'wired',
-            'uri' => 'www.wired.com',
-            'rssUri' => 'www.wired.com/rss.xml',
-            'logoUri' => 'foo.jpg',
-        ),
-        2 => array(
-            'id' => '2',
-            'name' => 'enadget',
-            'bio' => 'bar foo',
-            'title' => 'engadget',
-            'uri' => 'www.engadget.com',
-            'rssUri' => 'www.engadget.com/rss.xml',
-            'logoUri' => 'foo.jpg',
-        )
-    );
+    $rtn = new \stdClass();
+    $rtn->success = true;
+    $rtn->providers = $categories;
 
     return new Response(
         json_encode($rtn),

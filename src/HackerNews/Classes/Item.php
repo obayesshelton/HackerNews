@@ -4,16 +4,28 @@ namespace HackerNews\Classes;
 
 class Item
 {
+	public $id;
+
 	public $title;
 
 	public $link;
 
 	public $pubDate;
 
-	public $contentOwnerId;
+	public $providerId;
+
+	public $providerCategoryId;
 
 	public function __construct() {
 	
+	}
+
+	public function getId() {
+		return $this->id;
+	}
+
+	protected function setId($id) {
+		$this->id = $id;
 	}
 
 	public function getTitle() {
@@ -40,19 +52,29 @@ class Item
 		$this->pubDate = $pubDate;
 	}
 
-	public function getContentOwnerId() {
-		return $this->contentOwnerId;
+	public function getProviderId() {
+		return $this->providerId;
 	}
 
-	private function setContentOwnerId($contentOwnerId) {
-		$this->contentOwnerId = $contentOwnerId;
+	private function setProviderId($providerId) {
+		$this->providerId = $providerId;
+	}
+
+	public function getProviderCategoryId() {
+		return $this->providerCategoryId;
+	}
+
+	private function setProviderCategoryId($providerCategoryId) {
+		$this->providerCategoryId = $providerCategoryId;
 	}
 
 	public function createInstanceFromRow($row) {
+		$this->setTitle($row['id']);
 		$this->setTitle($row['title']);
 		$this->setLink($row['link']);
 		$this->setPubDate($row['pub_date']);
-		$this->setContentOwnerId($row['content_owner_id']);
+		$this->setProviderId($row['provider_id']);
+		$this->setProviderCategoryId($row['provider_catgory']);
 
 		return $this;
 	}

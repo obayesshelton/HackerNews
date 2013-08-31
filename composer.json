@@ -20,7 +20,8 @@
         "symfony/translation": "~2.2",
         "symfony/twig-bridge": "~2.2",
         "symfony/validator": "~2.2",
-        "twitter/bootstrap": "2.3.*"
+        "twitter/bootstrap": "2.3.*",
+        "doctrine/dbal": "2.2.*"
     },
     "autoload": {
         "psr-0": { "HackerNews": "src/" }

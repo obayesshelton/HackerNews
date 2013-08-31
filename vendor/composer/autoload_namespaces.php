@@ -39,4 +39,6 @@ return array(
     'Pimple' => array($vendorDir . '/pimple/pimple/lib'),
     'Monolog' => array($vendorDir . '/monolog/monolog/src'),
     'HackerNews' => array($baseDir . '/src'),
+    'Doctrine\\DBAL' => array($vendorDir . '/doctrine/dbal/lib'),
+    'Doctrine\\Common' => array($vendorDir . '/doctrine/common/lib'),
 );

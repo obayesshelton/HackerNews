@@ -20,4 +20,17 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     return $twig;
 }));
 
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'dbs.options' => array (
+        'mysql_read' => array(
+            'driver'    => 'pdo_mysql',
+            'host'      => '127.0.0.1',
+            'dbname'    => 'HackerNews',
+            'user'      => 'root',
+            'password'  => 'O1211990!',
+            'charset'   => 'utf8',
+        ),
+    ),
+));
+
 return $app;
