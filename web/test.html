@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<body>
+
+<div id="contentList">
+
+  
+
+</div>
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+
+function refreshList() {
+  
+  $("#contentList").html("Loading...");
+  
+  $.ajax({
+    url: "http://oliver-news.rooble.co.uk/categories/all",
+    cache: false
+  }).done(function (data) {
+  
+  var listNode = $("#contentList");
+  var listHTML = '<table class="table table-striped">';
+  listHTML += "<thead><tr><th>id</th><th>name</th><th>providers in cat</th><th>users reading this cat</th></tr></thead>"
+  
+  if (data.categories) {
+    $.each(data.categories, function (index, data) {
+      listHTML += '<tr><td>' + data.id + '</td>';
+      listHTML += '<td>' + data.name + '</td>';
+      listHTML += '<td>' + data.provider_count + '</td>';
+      listHTML += '<td>' + data.user_count + '</td></tr>';
+    });
+  }
+
+  listHTML += '</table>';
+  listNode.html(listHTML);
+  
+  });
+
+}
+
+refreshList();
+
+</script>
+
+</body>
