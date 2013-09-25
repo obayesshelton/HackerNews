@@ -36,7 +36,7 @@ $app->get('/providers/all', function(Request $request) use ($app) {
 
     $rtn = new \stdClass();
     $rtn->success = true;
-    $rtn->providers = $categories;
+    $rtn->providers = $providers;
 
     return new Response(
         json_encode($rtn),

@@ -4,21 +4,18 @@ namespace HackerNews\Classes;
 
 class Feed
 {
-	public $host;
-
-	public $protocol;
-
-	public $path;
-
 	public $uri;
 
-	public function __construct($protocol = null, $host = null, $path = null) {
-		$this->protocol = $protocol;
-		$this->host     = $host;
-		$this->path     = $path;
+	public function __construct() {
+		
+	}
 
-		$this->uri = $protocol . $host . $path;
+	public function setUri($value) {
+		$this->uri = $value;
+	}
 
+	public function getUri() {
+		return $this->uri;
 	}
 
 	public function getItem() {
@@ -34,7 +31,8 @@ class Feed
 		  $items[$i]['title'] 			 = $itemsRaw->item($i)->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
 		  $items[$i]['link'] 			 = $itemsRaw->item($i)->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
 		  $items[$i]['pub_date'] 		 = $itemsRaw->item($i)->getElementsByTagName('pubDate')->item(0)->childNodes->item(0)->nodeValue;
-		  $items[$i]['content_owner_id'] = 1;
+		  $items[$i]['provider_id'] = 4;
+		  $items[$i]['provider_id'] = 4;
 
 		  $i++;
 
