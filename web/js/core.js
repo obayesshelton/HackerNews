@@ -4,12 +4,48 @@ var hackerNews = function() {
 
 	}
 
-	this.loadItems = function(feed, id) {
+	this.loadCatgories = function() {
 
 		$.ajax({
-	    	url: feed,  
+	    	url: '/categories/all',  
 	    	success:function(data) {
-	      		$('#' + id).html(data);
+	      		var container = $('#categories-list');
+	    		$.each(data.categories, function(index, value) {
+	    			container.append('<li class="icon icon-arrow-left"><a class="icon icon-display providers" onclick="hackerNews.loadProviders(' + value.id + ')">' + value.name + '</a></li>');
+	    		});
+
+	    	}
+	  	});
+
+	}
+
+	this.loadProviders = function(id) {
+
+		$.ajax({
+	    	url: '/providers/categorid/' + id,  
+	    	success:function(data) {
+	      		
+	    		$.each(data.providers, function(index, value) {
+
+
+// BEN NEED TO LOOP THROUGH AND ADD PROVIDERS IN A LIST TO CLICK
+
+	    			console.log(value);
+	    		});
+
+	    	}
+	  	});
+
+	}
+
+	this.loadItems = function(id) {
+		$.ajax({
+	    	url: '/items/provider-id/' + id,  
+	    	success:function(data) {
+	    		var container = $('#items');
+	      		$.each(data.items, function(index, value) {
+	    			container.append('<li><div class="post_number">' + value.id + '</div><a href="' + value.link + '" class="title"><strong>' + value.title + '</strong> (' + value.pub_date + ')</a></li>');
+	    		});
 	    	}
 	  	});
 
@@ -71,14 +107,10 @@ $(document).ready( function() {
   //   });
 
 $('.grow').on( 'click', function() {
-			$('.wrapper').animate({left: '60%'}, 500);
-			$('.author, .points').hide();
-			$('.title').css({width: '60%'})
-
-		} );
-
-
-
+	$('.wrapper').animate({left: '60%'}, 500);
+	$('.author, .points').hide();
+	$('.title').css({width: '60%'})
+});
 
 });
 
